@@ -13,6 +13,6 @@ python manage.py migrate
 echo ">>> Collecting static files..."
 python manage.py collectstatic --no-input
 
-# Optional: Seed the database
-# echo ">>> Seeding database..."
-# python database/seed.py
+echo ">>> Seeding database..."
+python database/seed.py
+
