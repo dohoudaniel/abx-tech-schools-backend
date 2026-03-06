@@ -183,4 +183,9 @@ SPECTACULAR_SETTINGS = {
 }
 
 # CORS configuration
-CORS_ALLOW_ALL_ORIGINS = True  # For development purposes
+CORS_ALLOWED_ORIGINS = [
+    "https://abxtechschoolslmsapi.vercel.app",
+    "https://abxtechschoolslmsapi-v1.vercel.app",
+]
+CORS_ALLOW_CREDENTIALS = True
+
