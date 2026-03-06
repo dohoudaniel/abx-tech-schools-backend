@@ -12,6 +12,9 @@ This is the backend for the ABX Tech Schools Learning Management System (LMS), b
 - **Interactive API Documentation**: Full Swagger UI and ReDoc integration.
 - **Production-Ready Database**: Configured for Supabase (PostgreSQL) with `dj-database-url`.
 
+> [!TIP]
+> **Parents Feature**: A dedicated feature for parents is currently under development and can be found in the [`feature/parents`](../../tree/feature/parents) branch. It includes parent profiles and student-parent linking.
+
 ---
 
 ## 🛠️ Technology Stack
