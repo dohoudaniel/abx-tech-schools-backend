@@ -39,4 +39,8 @@ class EnrollmentViewSet(viewsets.ModelViewSet):
         except Student.DoesNotExist:
             raise exceptions.PermissionDenied("Only students can enroll in courses.")
             
+        course = serializer.validated_data['course']
+        if Enrollment.objects.filter(student=student, course=course).exists():
+            raise exceptions.ValidationError({"detail": "You are already enrolled in this course."})
+            
         serializer.save(student=student)
