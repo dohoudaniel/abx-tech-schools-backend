@@ -174,7 +174,7 @@ SIMPLE_JWT = {
 # Swagger UI configuration
 SPECTACULAR_SETTINGS = {
     'TITLE': 'ABX Tech Schools LMS API',
-    'DESCRIPTION': 'API for Managing Students, Teachers, Courses, and Enrollments',
+    'DESCRIPTION': 'API for Managing Students, Teachers, Courses, Enrollments, and Parents',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     'COMPONENT_SPLIT_PATCH': True,
@@ -182,4 +182,14 @@ SPECTACULAR_SETTINGS = {
 }
 
 # CORS configuration
-CORS_ALLOW_ALL_ORIGINS = True  # For development purposes
+CORS_ALLOWED_ORIGINS = [
+    "https://abxtechschoolslmsapi.vercel.app",
+    "https://abxtechschoolslmsapi-v1.vercel.app",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
+CORS_ALLOW_CREDENTIALS = True
+
+
