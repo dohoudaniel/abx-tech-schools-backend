@@ -3,6 +3,7 @@ from .models import Enrollment
 from .serializers import EnrollmentSerializer
 from students.models import Student
 from teachers.models import Teacher
+from parents.models import Parent
 
 class EnrollmentViewSet(viewsets.ModelViewSet):
     """
@@ -26,6 +27,11 @@ class EnrollmentViewSet(viewsets.ModelViewSet):
         # If user is a teacher, they see enrollments for their courses
         elif Teacher.objects.filter(email=user.email).exists():
             return Enrollment.objects.filter(course__teacher__email=user.email)
+            
+        # If user is a parent, they see enrollments for their linked students
+        elif Parent.objects.filter(email=user.email).exists():
+            parent = Parent.objects.get(email=user.email)
+            return Enrollment.objects.filter(student__parents=parent)
             
         return Enrollment.objects.none()
 
