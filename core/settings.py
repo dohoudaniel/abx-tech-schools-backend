@@ -186,13 +186,14 @@ SPECTACULAR_SETTINGS = {
 
 # CORS configuration
 CORS_ALLOWED_ORIGINS = [
-    "https://abxtechschoolslmsapi.vercel.app",
-    "https://abxtechschoolslmsapi-v1.vercel.app",
+    "https://abxtechschoolslms.vercel.app",
+    "https://abxtechschoolslms-v1.vercel.app",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]
 CORS_ALLOW_CREDENTIALS = True
+
 
 
