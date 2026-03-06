@@ -34,6 +34,20 @@ class CourseViewSet(viewsets.ModelViewSet):
         teacher = Teacher.objects.get(email=self.request.user.email)
         serializer.save(teacher=teacher)
         
+    @action(detail=False, methods=['get'], url_path='my-courses')
+    def my_courses(self, request):
+        """
+        Gets a list of courses taught by the currently authenticated teacher.
+        """
+        try:
+            teacher = Teacher.objects.get(email=request.user.email)
+        except Teacher.DoesNotExist:
+            return Response({"detail": "Teacher profile not found."}, status=404)
+            
+        courses = Course.objects.filter(teacher=teacher)
+        serializer = self.get_serializer(courses, many=True)
+        return Response(serializer.data)
+
     @action(detail=True, methods=['get'])
     def students(self, request, pk=None):
         """
