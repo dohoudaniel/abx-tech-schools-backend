@@ -88,6 +88,13 @@ Once the server is running, you can access the documentation at:
 - **Swagger UI**: [http://127.0.0.1:8000/api/docs/](http://127.0.0.1:8000/api/docs/)
 - **ReDoc**: [http://127.0.0.1:8000/api/redoc/](http://127.0.0.1:8000/api/redoc/)
 
+---
+
+## 🔑 Test Credentials
+
+To test the API with pre-seeded data, you can find a list of all teacher, student, and parent accounts here:
+👉 **[View Test Credentials](./docs/CREDENTIALS.md)**
+
 ### Main Endpoints
 | Feature | Endpoint | Method | Description |
 | :--- | :--- | :--- | :--- |
