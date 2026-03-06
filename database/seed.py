@@ -33,7 +33,7 @@ def run():
         ("Ade", "Olawale", "M", ["Mathematics", "Further Mathematics (Advanced)"]),
         ("Bolu", "Rios", "F", ["Biology", "Further Mathematics (Standard)"]),
         ("Cynthia", "Thawne", "F", ["English"]),
-        ("Daniel", "DOhou", "M", ["Physics", "Chemistry"]),
+        ("Daniel", "Dohou", "M", ["Physics", "Chemistry"]),
     ]
 
     all_courses = []
