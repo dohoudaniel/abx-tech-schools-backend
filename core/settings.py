@@ -177,6 +177,8 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': 'API for Managing Students, Teachers, Courses, and Enrollments',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
+    'COMPONENT_SPLIT_PATCH': True,
+    'COMPONENT_SPLIT_REQUEST': True,
 }
 
 # CORS configuration
