@@ -3,6 +3,7 @@ from .models import User
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from students.models import Student
 from teachers.models import Teacher
+from parents.models import Parent
 
 class UserSerializer(serializers.ModelSerializer):
     profile_data = serializers.SerializerMethodField()
@@ -24,6 +25,13 @@ class UserSerializer(serializers.ModelSerializer):
             if teacher:
                 return {
                     'gender': teacher.get_gender_display() if teacher.gender else None,
+                }
+        elif obj.role == 'parent':
+            parent = Parent.objects.filter(email=obj.email).first()
+            if parent:
+                return {
+                    'gender': parent.get_gender_display() if parent.gender else None,
+                    'family_last_name': parent.family_last_name,
                 }
         return {}
 
