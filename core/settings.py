@@ -57,7 +57,6 @@ INSTALLED_APPS = [
     'teachers',
     'courses',
     'enrollments',
-    'parents',
 ]
 
 MIDDLEWARE = [
@@ -177,7 +176,7 @@ SIMPLE_JWT = {
 # Swagger UI configuration
 SPECTACULAR_SETTINGS = {
     'TITLE': 'ABX Tech Schools LMS API',
-    'DESCRIPTION': 'API for Managing Students, Teachers, Courses, Enrollments, and Parents',
+    'DESCRIPTION': 'API for Managing Students, Teachers, Courses, Enrollments',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     'COMPONENT_SPLIT_PATCH': True,
