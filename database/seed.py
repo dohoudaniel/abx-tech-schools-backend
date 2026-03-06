@@ -1,7 +1,13 @@
 import os
 import django
 import random
+import sys
 from datetime import date, timedelta
+from pathlib import Path
+
+# Add the project root to sys.path
+root_dir = Path(__file__).resolve().parent.parent
+sys.path.append(str(root_dir))
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
 django.setup()
@@ -35,7 +41,7 @@ def run():
     for first, last, gender, subjects in teacher_data:
         email = f"{first.lower()}.{last.lower()}@school.edu"
         # 1. Create User
-        user = User.objects.create_user(email=email, password="password123")
+        user = User.objects.create_user(email=email, password="password123", role='teacher')
         # 2. Create Teacher profile
         teacher = Teacher.objects.create(email=email, first_name=first, last_name=last, gender=gender)
         
@@ -67,7 +73,7 @@ def run():
     
     for first, last, gender in student_data:
         email = f"{first.lower()}.{last.lower()}@student.edu"
-        user = User.objects.create_user(email=email, password="password123")
+        user = User.objects.create_user(email=email, password="password123", role='student')
         
         # Generate age between exactly 14 and less than 17 years old
         # 14 years in days ~ 5113, 17 years in days ~ 6209
