@@ -41,7 +41,13 @@ def run():
     for first, last, gender, subjects in teacher_data:
         email = f"{first.lower()}.{last.lower()}@school.edu"
         # 1. Create User
-        user = User.objects.create_user(email=email, password="password123", role='teacher')
+        user = User.objects.create_user(
+            email=email, 
+            password="password123", 
+            role='teacher',
+            first_name=first,
+            last_name=last
+        )
         # 2. Create Teacher profile
         teacher = Teacher.objects.create(email=email, first_name=first, last_name=last, gender=gender)
         
@@ -73,7 +79,13 @@ def run():
     
     for first, last, gender in student_data:
         email = f"{first.lower()}.{last.lower()}@student.edu"
-        user = User.objects.create_user(email=email, password="password123", role='student')
+        user = User.objects.create_user(
+            email=email, 
+            password="password123", 
+            role='student',
+            first_name=first,
+            last_name=last
+        )
         
         # Generate age between exactly 14 and less than 17 years old
         # 14 years in days ~ 5113, 17 years in days ~ 6209
