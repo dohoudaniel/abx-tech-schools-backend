@@ -154,6 +154,28 @@ This API uses **JSON Web Tokens (JWT)** for authentication. Protected endpoints 
 
 ---
 
+## 👨‍👩‍👦 Parents
+
+### 1. List Parents
+- **Endpoint:** `GET /api/parents/`
+- **Access:** Authenticated Users
+- **Description:** Retrieves a list of all parents. Parents see only their own profile.
+
+### 2. Retrieve a Specific Parent
+- **Endpoint:** `GET /api/parents/{id}/`
+- **Access:** Authenticated Users
+- **Description:** Returns parent details, including their linked students and specific relationship types.
+
+### 3. List Parent-Student Links
+- **Endpoint:** `GET /api/parents/links/`
+- **Access:** Authenticated Users
+- **Description:** 
+  - **Parents:** See links to their children.
+  - **Students:** See links to their parents.
+  - Describes the `relationship` (e.g., Mother, Father, Guardian).
+
+---
+
 ## 🛠️ Errors and Status Codes Reference
 - **200 OK**: Request successful.
 - **201 Created**: Resource successfully created.

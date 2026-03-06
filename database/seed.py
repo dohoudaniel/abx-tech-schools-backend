@@ -17,9 +17,12 @@ from students.models import Student
 from teachers.models import Teacher
 from courses.models import Course
 from enrollments.models import Enrollment
+from parents.models import Parent, ParentStudent
 
 def run():
     print("🧹 Cleaning existing database records (excluding superusers)...")
+    ParentStudent.objects.all().delete()
+    Parent.objects.all().delete()
     Enrollment.objects.all().delete()
     Course.objects.all().delete()
     Student.objects.all().delete()
@@ -123,11 +126,51 @@ def run():
         for c in enrolled_courses:
             Enrollment.objects.create(student=student, course=c)
 
+    print("👨‍👩‍👦 Seeding Parents...")
+    parent_data = [
+        ("Mishael", "West", "mishael.west@parent.edu", "West", "M", [("Joe", "father"), ("Wally", "father")]),
+        ("Maya", "West", "maya.west@parent.edu", "West", "F", [("Joe", "mother"), ("Wally", "mother")]),
+        ("Ivy", "Finch", "ivy.finch@parent.edu", "Finch", "F", [("Jasper", "mother")]),
+        ("Nora", "Allen", "nora.allen@parent.edu", "Allen", "F", [("Barry", "mother"), ("Iris", "mother")]),
+        ("Tessa", "Vance", "tessa.vance@parent.edu", "Vance", "F", [("Elana", "mother")]),
+    ]
+
+    for first, last, email, family_last, gender, children in parent_data:
+        # 1. Create User
+        user = User.objects.create_user(
+            email=email,
+            password="password123",
+            role='parent',
+            first_name=first,
+            last_name=last
+        )
+        # 2. Create Parent Profile
+        parent = Parent.objects.create(
+            first_name=first,
+            last_name=last,
+            email=email,
+            gender=gender,
+            family_last_name=family_last
+        )
+        # 3. Link students
+        for child_name, rel in children:
+            try:
+                student = Student.objects.get(first_name=child_name)
+                ParentStudent.objects.create(
+                    parent=parent,
+                    student=student,
+                    relationship=rel
+                )
+            except Student.DoesNotExist:
+                # Should not happen with our seeds
+                pass
+
     print("\n✅ Database Seeding Completed Successfully!")
     print(f"   Total Teachers: {Teacher.objects.count()}")
     print(f"   Total Courses: {Course.objects.count()}")
     print(f"   Total Students: {Student.objects.count()}")
     print(f"   Total Enrollments: {Enrollment.objects.count()}")
+    print(f"   Total Parents: {Parent.objects.count()}")
     print("\nUse password: 'password123' to log in via API for any generated user.")
 
 if __name__ == '__main__':

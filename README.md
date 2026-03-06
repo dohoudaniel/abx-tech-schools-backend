@@ -8,6 +8,7 @@ This is the backend for the ABX Tech Schools Learning Management System (LMS), b
 - **Teacher Management**: CRUD operations for teachers.
 - **Course Management**: Links courses to teachers (One-to-Many).
 - **Enrollment System**: Junction system for many-to-many relationships between students and courses.
+- **Parent Management**: Link parents to students with specific relationship types (Father, Mother, Guardian).
 - **Modern Authentication**: Email-based login using JWT (SimpleJWT).
 - **Interactive API Documentation**: Full Swagger UI and ReDoc integration.
 - **Production-Ready Database**: Configured for Supabase (PostgreSQL) with `dj-database-url`.
@@ -34,6 +35,7 @@ The database follows a relational structure optimized for an LMS:
 ### Relationship Logic
 - **Teacher → Course**: One-to-Many (One teacher per course).
 - **Student ↔ Course**: Many-to-Many (Implemented via the `enrollments` table).
+- **Parent ↔ Student**: Many-to-Many (Implemented via the `parents_students` junction table).
 
 ---
 
@@ -94,6 +96,7 @@ Once the server is running, you can access the documentation at:
 | **Teachers** | `/api/teachers/` | GET/POST | List and create teachers |
 | **Courses** | `/api/courses/` | GET/POST | Courses and their teachers |
 | **Enrollments** | `/api/enrollments/` | GET/POST | Student course registrations |
+| **Parents** | `/api/parents/` | GET/POST | Parent profiles and student links |
 
 ---
 
