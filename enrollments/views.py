@@ -1,10 +1,42 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions, exceptions
 from .models import Enrollment
 from .serializers import EnrollmentSerializer
+from students.models import Student
+from teachers.models import Teacher
 
 class EnrollmentViewSet(viewsets.ModelViewSet):
     """
     ViewSet for viewing and editing enrollment instances.
     """
-    queryset = Enrollment.objects.all()
     serializer_class = EnrollmentSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        if not user.is_authenticated:
+            return Enrollment.objects.none()
+            
+        if user.is_superuser:
+            return Enrollment.objects.all()
+
+        # If user is a student, they see their own enrollments
+        if Student.objects.filter(email=user.email).exists():
+            return Enrollment.objects.filter(student__email=user.email)
+            
+        # If user is a teacher, they see enrollments for their courses
+        elif Teacher.objects.filter(email=user.email).exists():
+            return Enrollment.objects.filter(course__teacher__email=user.email)
+            
+        return Enrollment.objects.none()
+
+    def perform_create(self, serializer):
+        """
+        Assign the currently authenticated student to the new enrollment.
+        Teachers are not allowed to enroll in courses.
+        """
+        try:
+            student = Student.objects.get(email=self.request.user.email)
+        except Student.DoesNotExist:
+            raise exceptions.PermissionDenied("Only students can enroll in courses.")
+            
+        serializer.save(student=student)
